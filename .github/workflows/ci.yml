@@ -61,3 +61,5 @@ jobs:
       - run: npx nx affected -t lint
 
       - run: npx nx run-many -t lint build test
+
+      - run: npx nx-cloud complete-ci-run
