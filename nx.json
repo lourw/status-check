@@ -56,6 +56,7 @@
       }
     }
   },
+  "bustCache": 23,
   "nxCloudUrl": "https://ghost-apt-liger.ngrok-free.app",
   "nxCloudId": "67868f0d04dc3d5beabbf308"
 }
