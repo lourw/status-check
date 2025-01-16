@@ -8,6 +8,7 @@ on:
 
 env:
   NX_VERBOSE_LOGGING: true
+  NX_CI_EXECUTION_ENV: test
 
 permissions:
   actions: read
@@ -16,6 +17,7 @@ permissions:
 jobs:
   agent:
     runs-on: ubuntu-latest
+    timeout-minutes: 3
     steps:
       - uses: actions/checkout@v4
         with:
