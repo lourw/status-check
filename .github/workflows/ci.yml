@@ -15,7 +15,7 @@ permissions:
   contents: read
 
 jobs:
-  agent:
+  agent-1:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
@@ -31,6 +31,31 @@ jobs:
       - run: npm ci --legacy-peer-deps
 
       - run: npx nx-cloud start-agent
+        env:
+          NX_AGENT_NAME: "test-1"
+          NX_AGENT_LAUNCH_TEMPLATE: "linux-1"
+
+
+  agent-2:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - run: npm ci --legacy-peer-deps
+
+      - run: npx nx-cloud start-agent
+        env:
+          NX_AGENT_NAME: "test-2"
+          NX_AGENT_LAUNCH_TEMPLATE: "linux-2"
+
   main:
     runs-on: ubuntu-latest
     steps:
@@ -42,7 +67,7 @@ jobs:
       # Run this command as early as possible, before dependencies are installed
       # Learn more at https://nx.dev/ci/reference/nx-cloud-cli#npx-nxcloud-startcirun
       # Connect your workspace by running "nx connect" and uncomment this line to enable task distribution
-      - run: npx nx-cloud start-ci-run --distribute-on="manual" --stop-agents-after="e2e-ci"
+      - run: npx nx-cloud start-ci-run --distribute-on="manual" --assignment-rules="./.nx/workflows/assignment-rules.yaml" --stop-agents-after="e2e-ci"
 
       # Cache node_modules
       - uses: actions/setup-node@v4

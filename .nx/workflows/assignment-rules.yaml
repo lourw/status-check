@@ -1,0 +1,7 @@
+assignment-rules:
+  - target: lint
+    runs-on:
+      - linux-1
+  - target: test
+    runs-on:
+      - linux-2
